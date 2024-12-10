@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "438163921176",
+    "firebase_url": "https://chirkut-demo-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "chirkut-demo",
+    "storage_bucket": "chirkut-demo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:438163921176:android:bdeaab4aced717d2b6e66d",
+        "android_client_info": {
+          "package_name": "tasmirz.chirkut"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "438163921176-et99gjakedihmvjtpqi39ha7hu9mr200.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX27rNNAmfOXINWAu5CTc22g0F2d12Tes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "438163921176-et99gjakedihmvjtpqi39ha7hu9mr200.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
