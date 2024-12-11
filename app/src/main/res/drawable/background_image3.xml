@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <path
+        android:fillColor="#E6D2B5"
+        android:pathData="M15,20
+            C25,15 35,12 45,15
+            L75,20
+            C85,22 90,27 92,35
+            L95,65
+            C93,75 88,82 80,85
+            L35,90
+            C25,88 18,82 15,75
+            L12,40
+            Z">
+        <shader
+            android:type="radial"
+            android:centerColor="#E6D2B5"
+            android:edgeColor="#D2B48C"
+            android:gradientRadius="100"/>
+    </path>
+
+    <!-- Crumpled paper texture -->
+    <path
+        android:strokeColor="#55000000"
+        android:strokeWidth="0.7"
+        android:pathData="M20,25 C25,30 30,35 35,25 M50,35 C55,40 60,45 65,35 M75,45 C80,50 85,55 90,45"/>
+
+    <text
+        android:text="ALEX"
+        android:fillColor="#3A2C1B"
+        android:textSize="25"
+        android:x="35"
+        android:y="60"/>
+</vector>

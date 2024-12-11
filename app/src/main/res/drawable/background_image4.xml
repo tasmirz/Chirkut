@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <path
+        android:fillColor="#F0EAD6"
+        android:pathData="M20,25
+            C30,20 40,18 50,22
+            L80,30
+            C90,35 95,42 94,52
+            L92,75
+            C90,85 82,90 72,88
+            L40,85
+            C30,83 22,76 20,66
+            L18,45
+            Z">
+        <shader
+            android:type="sweep"
+            android:centerColor="#F0EAD6"
+            android:edgeColor="#D2B48C"/>
+    </path>
+
+    <!-- Torn paper effect -->
+    <path
+        android:strokeColor="#66000000"
+        android:strokeWidth="0.5"
+        android:pathData="M25,35 C30,40 35,45 40,35 M55,45 C60,50 65,55 70,45 M80,55 C85,60 90,65 95,55"/>
+
+    <text
+        android:text="EMMA"
+        android:fillColor="#4A3C2B"
+        android:textSize="25"
+        android:x="35"
+        android:y="65"/>
+</vector>
