@@ -25,28 +25,26 @@ public class MessageAdapter extends FirebaseRecyclerAdapter<Message, MessageAdap
 
     @Override
     protected void onBindViewHolder(@NonNull MessageViewHolder holder, int position, @NonNull Message model) {
-        String messageId = getRef(position).getKey();
+        int reversePosition = getItemCount() - 1 - position;
+        String messageId = getRef(reversePosition).getKey();
         model.setMessageId(messageId);
-
 
         String decryptedMessage = decryptMessage(model.getEncryptedText(), privateKey);
         String decryptedSharedKey = decryptMessage(model.getEncryptedSharedLKey(), privateKey);
         holder.messageText.setText(decryptedMessage);
-
 
         long timestamp = model.getTime();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
         String dateTime = sdf.format(new java.util.Date(timestamp));
         holder.dateText.setText(dateTime);
 
-
-        holder.itemView.setOnClickListener(v -> {
+        holder.messageText.setOnClickListener(v -> {
             Intent intent = new Intent(context, Response.class);
             intent.putExtra("message", decryptedMessage);
             intent.putExtra("messageId", model.getMessageId());
-            intent.putExtra("background",model.getBackgroundSelected());
-            intent.putExtra("replySent",model.getReplySent());
-            intent.putExtra("sharedKey",decryptedSharedKey);
+            intent.putExtra("background", model.getBackgroundSelected());
+            intent.putExtra("replySent", model.getReplySent());
+            intent.putExtra("sharedKey", decryptedSharedKey);
 
             context.startActivity(intent);
         });
@@ -57,6 +55,16 @@ public class MessageAdapter extends FirebaseRecyclerAdapter<Message, MessageAdap
     public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message, parent, false);
         return new MessageViewHolder(v);
+    }
+
+    @Override
+    public int getItemCount() {
+        return super.getItemCount();
+    }
+
+    @Override
+    public Message getItem(int position) {
+        return super.getItem(getItemCount() - 1 - position);
     }
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {

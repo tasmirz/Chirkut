@@ -34,8 +34,8 @@
                 android:id="@+id/dateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
                 android:text="2024-12-11"
+                android:textColor="#FF9800"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -43,9 +43,11 @@
             <!-- Message Text -->
             <TextView
                 android:id="@+id/messageText"
-                android:layout_width="312dp"
-                android:layout_height="147dp"
-                android:background="#f0f0f0"
+                android:layout_width="314dp"
+                android:layout_height="145dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="#FFF9F1"
                 android:ellipsize="end"
                 android:gravity="start|top"
                 android:maxLines="5"
