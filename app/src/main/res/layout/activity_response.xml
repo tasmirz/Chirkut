@@ -7,4 +7,79 @@
     android:layout_height="match_parent"
     tools:context=".Response">
 
+    <TextView
+        android:id="@+id/resp_msg"
+        android:layout_width="327dp"
+        android:layout_height="357dp"
+        android:background="@drawable/background_image1"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042" />
+
+    <EditText
+        android:id="@+id/resp_reply"
+        android:layout_width="327dp"
+        android:layout_height="239dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resp_msg" />
+
+    <Button
+        android:id="@+id/resp_share"
+        android:layout_width="105dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#FFC107"
+        android:text="Share"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resp_reply"
+        app:layout_constraintVertical_bias="0.508"
+        app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+    <Button
+        android:id="@+id/resp_priv"
+        android:layout_width="142dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="#FF9800"
+        android:text="Reply Privately"
+        app:layout_constraintEnd_toStartOf="@+id/resp_del"
+        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintStart_toEndOf="@+id/resp_share"
+        app:layout_constraintTop_toTopOf="@+id/resp_share"
+        app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+    <Button
+        android:id="@+id/resp_back"
+        android:layout_width="42dp"
+        android:layout_height="39dp"
+        android:background="@drawable/ic_back"
+        android:backgroundTint="#FFC107"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.016"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.008" />
+
+    <Button
+        android:id="@+id/resp_del"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="44dp"
+        android:background="@android:drawable/ic_menu_delete"
+        android:backgroundTint="#FF5722"
+        app:layout_constraintBottom_toBottomOf="@+id/resp_priv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/resp_priv"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

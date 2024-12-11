@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <path
+        android:fillColor="#F5DEB3"
+        android:pathData="M10,15
+            C15,10 20,8 30,10
+            L70,15
+            C80,17 85,20 87,25
+            L90,70
+            C88,80 85,85 80,87
+            L30,90
+            C20,88 15,85 12,80
+            L10,30
+    Z"/>
 
-</selector>
+    <!-- Texture effect -->
+    <path
+        android:strokeColor="#88000000"
+        android:strokeWidth="0.5"
+        android:pathData="M15,20 L85,20 M15,40 L85,40 M15,60 L85,60 M15,80 L85,80"/>
+
+</vector>

@@ -19,4 +19,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="129dp"
+        tools:layout_editor_absoluteY="54dp"
+        tools:src="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btn_signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Out"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="203dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

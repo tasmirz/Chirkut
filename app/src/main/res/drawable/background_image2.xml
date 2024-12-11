@@ -5,34 +5,24 @@
     android:viewportWidth="100"
     android:viewportHeight="100">
     <path
-        android:fillColor="#F5DEB3"
-        android:pathData="M10,15
-            C15,10 20,8 30,10
-            L70,15
-            C80,17 85,20 87,25
-            L90,70
-            C88,80 85,85 80,87
-            L30,90
-            C20,88 15,85 12,80
-            L10,30
+        android:fillColor="#E6D2B5"
+        android:pathData="M15,20
+            C25,15 35,12 45,15
+            L75,20
+            C85,22 90,27 92,35
+            L95,65
+            C93,75 88,82 80,85
+            L35,90
+            C25,88 18,82 15,75
+            L12,40
             Z">
-        <shader
-            android:type="linear"
-            android:startColor="#F5DEB3"
-            android:endColor="#DEB887"
-            android:angle="45"/>
     </path>
 
-    <!-- Texture effect -->
+    <!-- Crumpled paper texture -->
     <path
-        android:strokeColor="#88000000"
-        android:strokeWidth="0.5"
-        android:pathData="M15,20 L85,20 M15,40 L85,40 M15,60 L85,60 M15,80 L85,80"/>
+        android:strokeColor="#55000000"
+        android:strokeWidth="0.7"
+        android:pathData="M20,25 C25,30 30,35 35,25 M50,35 C55,40 60,45 65,35 M75,45 C80,50 85,55 90,45"/>
 
-    <text
-        android:text="JOHN"
-        android:fillColor="#4A3C2B"
-        android:textSize="25"
-        android:x="30"
-        android:y="60"/>
+
 </vector>

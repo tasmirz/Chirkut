@@ -5,33 +5,27 @@
     android:viewportWidth="100"
     android:viewportHeight="100">
     <path
-        android:fillColor="#F0EAD6"
-        android:pathData="M20,25
-            C30,20 40,18 50,22
-            L80,30
-            C90,35 95,42 94,52
-            L92,75
-            C90,85 82,90 72,88
-            L40,85
-            C30,83 22,76 20,66
-            L18,45
+        android:fillColor="#E8D0A9"
+        android:pathData="M10,15
+            C20,10 30,8 40,13
+            L70,25
+            C85,30 95,40 97,55
+            L99,80
+            C97,90 89,98 79,99
+            L30,97
+            C20,95 12,88 10,78
+            L8,45
             Z">
-        <shader
-            android:type="sweep"
-            android:centerColor="#F0EAD6"
-            android:edgeColor="#D2B48C"/>
     </path>
 
-    <!-- Torn paper effect -->
+    <!-- Crosshatch texture -->
     <path
-        android:strokeColor="#66000000"
-        android:strokeWidth="0.5"
-        android:pathData="M25,35 C30,40 35,45 40,35 M55,45 C60,50 65,55 70,45 M80,55 C85,60 90,65 95,55"/>
+        android:strokeColor="#44000000"
+        android:strokeWidth="0.6"
+        android:pathData="M10,15 L90,15 M10,30 L90,30 M10,45 L90,45 M10,60 L90,60 M10,75 L90,75 M10,90 L90,90"/>
+    <path
+        android:strokeColor="#33000000"
+        android:strokeWidth="0.4"
+        android:pathData="M5,10 L95,10 M5,25 L95,25 M5,40 L95,40 M5,55 L95,55 M5,70 L95,70 M5,85 L95,85"/>
 
-    <text
-        android:text="EMMA"
-        android:fillColor="#4A3C2B"
-        android:textSize="25"
-        android:x="35"
-        android:y="65"/>
 </vector>

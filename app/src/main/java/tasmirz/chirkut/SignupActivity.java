@@ -1,6 +1,7 @@
 package tasmirz.chirkut;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -29,8 +30,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
+import java.security.MessageDigest;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.util.Base64;
@@ -178,41 +181,63 @@ public class SignupActivity extends AppCompatActivity {
 
     private void createUser(FirebaseUser user) {
         try {
-            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-            keyGen.initialize(2048);
-            KeyPair keyPair = keyGen.generateKeyPair();
-            PublicKey publicKey = keyPair.getPublic();
-            PrivateKey privateKey = keyPair.getPrivate();
+            mDatabase.child("users").orderByChild("username").equalTo(usernameInput.getText().toString().trim()).get().addOnCompleteListener(task -> {
+                if (task.isSuccessful() && task.getResult().exists()) {
+                    Toast.makeText(SignupActivity.this, "Username already taken", Toast.LENGTH_SHORT).show();
+                    signOut();
+                    return;
+                } else {
+                    try {
+                        KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+                        keyGen.initialize(2048);
+                        KeyPair keyPair = keyGen.generateKeyPair();
+                        PublicKey publicKey = keyPair.getPublic();
+                        PrivateKey privateKey = keyPair.getPrivate();
+                        // Hash the user-provided password to SHA-256
+                        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                        byte[] hashedPassword = digest.digest(passwordInput.getText().toString().trim().getBytes(StandardCharsets.UTF_8));
+                        // Use the hashed password as the key for AES
+                        SecretKeySpec secretKeySpec = new SecretKeySpec(hashedPassword, "AES");
+                        Cipher cipher = Cipher.getInstance("AES");
+                        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+                        byte[] encryptedPrivateKey = cipher.doFinal(privateKey.getEncoded());
+                        String publicKeyString = Base64.getEncoder().encodeToString(publicKey.getEncoded());
+                        String encryptedPrivateKeyString = Base64.getEncoder().encodeToString(encryptedPrivateKey);
 
-            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(256);
-            SecretKey secretKey = keyGenerator.generateKey();
+                        // Convert user image to Base64 string
+                        Bitmap bitmap = ((BitmapDrawable) userImageSelector.getDrawable()).getBitmap();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                        byte[] imageBytes = baos.toByteArray();
+                        String imageString = Base64.getEncoder().encodeToString(imageBytes);
 
-            Cipher cipher = Cipher.getInstance("AES");
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            byte[] encryptedPrivateKey = cipher.doFinal(privateKey.getEncoded());
+                        User newUser = new User(user.getUid(), usernameInput.getText().toString().trim(), encryptedPrivateKeyString);
+                        UserProfile userProfile = new UserProfile(user.getUid(), usernameInput.getText().toString().trim(), imageString, publicKeyString);
 
-            String publicKeyString = Base64.getEncoder().encodeToString(publicKey.getEncoded());
-            String encryptedPrivateKeyString = Base64.getEncoder().encodeToString(encryptedPrivateKey);
+                        mDatabase.child("users").child(user.getUid()).setValue(newUser);
+                        mDatabase.child("userProfiles").child(user.getUid()).setValue(userProfile);
 
-            // Convert user image to Base64 string
-            Bitmap bitmap = ((BitmapDrawable) userImageSelector.getDrawable()).getBitmap();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-            byte[] imageBytes = baos.toByteArray();
-            String imageString = Base64.getEncoder().encodeToString(imageBytes);
+                        Toast.makeText(SignupActivity.this, "User created successfully", Toast.LENGTH_SHORT).show();
 
-            User newUser = new User(user.getUid(), usernameInput.getText().toString().trim(), encryptedPrivateKeyString);
-            UserProfile userProfile = new UserProfile(user.getUid(), usernameInput.getText().toString().trim(), imageString, publicKeyString);
+                        //untested block below
+                        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", usernameInput.getText().toString().trim());
+                        editor.putString("userId", user.getUid());
+                        editor.putString("PrivateKey", Base64.getEncoder().encodeToString(privateKey.getEncoded()));
+                        editor.putString("userImage", imageString);
+                        editor.apply();
+                        Intent intent = new Intent(SignupActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } catch (Exception e) {
+                        Toast.makeText(SignupActivity.this, "Error creating user - enc", Toast.LENGTH_SHORT).show();
+                        signOut();
+                        e.printStackTrace();
+                    }
+                }
+            }); //this block untestested
 
-            mDatabase.child("users").child(user.getUid()).setValue(newUser);
-            mDatabase.child("userProfiles").child(user.getUid()).setValue(userProfile);
-
-            Toast.makeText(SignupActivity.this, "User created successfully", Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(SignupActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
         } catch (Exception e) {
             Toast.makeText(SignupActivity.this, "Error creating user", Toast.LENGTH_SHORT).show();
             signOut();
@@ -227,30 +252,7 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    public static class User {
-        public String userId;
-        public String username;
-        public String encryptedPrivateKey;
 
-        public User(String userId, String username, String encryptedPrivateKey) {
-            this.userId = userId;
-            this.username = username;
-            this.encryptedPrivateKey = encryptedPrivateKey;
-        }
-    }
-    public class UserProfile {
-        public String userId;
-        public String username;
-        public String image;
-        public String publicKey;
-
-        public UserProfile(String userId, String username, String image, String publicKey) {
-            this.userId = userId;
-            this.username = username;
-            this.image = image;
-            this.publicKey = publicKey;
-        }
-    }
 
 }
 

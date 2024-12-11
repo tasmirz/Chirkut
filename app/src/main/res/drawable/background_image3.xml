@@ -5,34 +5,27 @@
     android:viewportWidth="100"
     android:viewportHeight="100">
     <path
-        android:fillColor="#E6D2B5"
-        android:pathData="M15,20
-            C25,15 35,12 45,15
-            L75,20
-            C85,22 90,27 92,35
-            L95,65
-            C93,75 88,82 80,85
-            L35,90
-            C25,88 18,82 15,75
-            L12,40
-            Z">
-        <shader
-            android:type="radial"
-            android:centerColor="#E6D2B5"
-            android:edgeColor="#D2B48C"
-            android:gradientRadius="100"/>
-    </path>
+        android:fillColor="#F4E1C1"
+        android:pathData="M5,10
+            C15,5 25,3 35,8
+            L65,20
+            C80,25 90,35 92,50
+            L95,75
+            C93,85 85,95 75,97
+            L25,99
+            C15,97 8,90 6,80
+            L3,40
+    Z"/>
 
-    <!-- Crumpled paper texture -->
+    <!-- Intense paper texture -->
     <path
         android:strokeColor="#55000000"
         android:strokeWidth="0.7"
-        android:pathData="M20,25 C25,30 30,35 35,25 M50,35 C55,40 60,45 65,35 M75,45 C80,50 85,55 90,45"/>
+        android:pathData="M10,20 L90,20 M10,40 L90,40 M10,60 L90,60 M10,80 L90,80"/>
+    <path
+        android:strokeColor="#44000000"
+        android:strokeWidth="0.5"
+        android:pathData="M5,15 C15,25 25,15 35,25 M50,35 C60,45 70,35 80,45 M20,65 C30,75 40,65 50,75"/>
 
-    <text
-        android:text="ALEX"
-        android:fillColor="#3A2C1B"
-        android:textSize="25"
-        android:x="35"
-        android:y="60"/>
+
 </vector>
