@@ -7,42 +7,67 @@
     android:layout_height="match_parent"
     tools:context=".Response">
 
-    <TextView
-        android:id="@+id/resp_msg"
-        android:layout_width="327dp"
-        android:layout_height="357dp"
-        android:background="@drawable/background_image1"
-        android:text="TextView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/capture"
+        android:layout_width="372dp"
+        android:layout_height="706dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.451"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.042" />
+        app:layout_constraintVertical_bias="0.345">
 
-    <EditText
-        android:id="@+id/resp_reply"
-        android:layout_width="327dp"
-        android:layout_height="239dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resp_msg" />
+        <EditText
+            android:id="@+id/resp_reply"
+            android:layout_width="293dp"
+            android:layout_height="206dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="#11FFC107"
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:inputType="text"
+            android:padding="10sp"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.816" />
+
+        <TextView
+            android:id="@+id/resp_msg"
+            android:layout_width="327dp"
+            android:layout_height="357dp"
+            android:background="@drawable/background_image1"
+            android:gravity="center_vertical"
+            android:padding="20sp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="@+id/resp_reply"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.091" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/resp_share"
         android:layout_width="105dp"
         android:layout_height="50dp"
+        android:background="@drawable/rounded_button"
         android:backgroundTint="#FFC107"
         android:text="Share"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintHorizontal_bias="0.091"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resp_reply"
-        app:layout_constraintVertical_bias="0.508"
-        app:shapeAppearanceOverlay="@style/roundedImageView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953" />
 
     <Button
         android:id="@+id/resp_priv"
@@ -51,11 +76,12 @@
         android:layout_marginStart="8dp"
         android:backgroundTint="#FF9800"
         android:text="Reply Privately"
+        android:background="@drawable/rounded_button"
         app:layout_constraintEnd_toStartOf="@+id/resp_del"
         app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toEndOf="@+id/resp_share"
         app:layout_constraintTop_toTopOf="@+id/resp_share"
-        app:shapeAppearanceOverlay="@style/roundedImageView" />
+         />
 
     <Button
         android:id="@+id/resp_back"
@@ -65,10 +91,10 @@
         android:backgroundTint="#FFC107"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.016"
+        app:layout_constraintHorizontal_bias="0.013"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.008" />
+        app:layout_constraintVertical_bias="0.01" />
 
     <Button
         android:id="@+id/resp_del"

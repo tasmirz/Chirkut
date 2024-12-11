@@ -10,6 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.view.View;
+import java.io.ByteArrayOutputStream;
 
 public class Response extends AppCompatActivity {
 
@@ -27,8 +33,26 @@ public class Response extends AppCompatActivity {
         String date = getIntent().getStringExtra("date");
         boolean replySent = getIntent().getBooleanExtra("replySent", false);
         Button privateReplyButton = findViewById(R.id.resp_priv);
-        int backgroundColor = getIntent().getIntExtra("background", 0);
-        findViewById(R.id.response_layout).setBackgroundColor(backgroundColor);
+        int background = getIntent().getIntExtra("background", 0);
+
+        switch (background) {
+            case 1:
+                respMsgTextView.setBackgroundResource(R.drawable.background_image1);
+                break;
+            case 2:
+                respMsgTextView.setBackgroundResource(R.drawable.background_image2);
+                break;
+            case 3:
+                respMsgTextView.setBackgroundResource(R.drawable.background_image3);
+                break;
+            case 4:
+                respMsgTextView.setBackgroundResource(R.drawable.background_image4);
+                break;
+            default:
+                respMsgTextView.setBackgroundResource(R.drawable.background_image1);
+                break;
+        }
+        
         if (replySent) {
             privateReplyButton.setEnabled(false);
         }
@@ -38,6 +62,23 @@ public class Response extends AppCompatActivity {
             Intent intent = new Intent(Response.this, MainActivity.class);
             startActivity(intent);
             finish();
+        });
+        Button shareButton = findViewById(R.id.resp_share);
+        shareButton.setOnClickListener(v -> {
+            View captureView = findViewById(R.id.capture);
+            Bitmap bitmap = Bitmap.createBitmap(captureView.getWidth(), captureView.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            captureView.draw(canvas);
+
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "Title", null);
+            Uri imageUri = Uri.parse(path);
+
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("image/*");
+            shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+            startActivity(Intent.createChooser(shareIntent, "Share Image"));
         });
         Button deleteButton = findViewById(R.id.resp_del);
         deleteButton.setOnClickListener(v -> {
