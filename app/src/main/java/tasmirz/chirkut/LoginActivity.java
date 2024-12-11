@@ -59,6 +59,20 @@ public class LoginActivity extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         Button loginButton = findViewById(R.id.login_button); 
+        findViewById(R.id.privacy_text).setOnClickListener(v -> {
+            Intent intent = new Intent(this, PrivacyPolicyActivity.class);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.terms_text).setOnClickListener(v -> {
+            Intent intent = new Intent(this, TermsOfServiceActivity.class);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.whitepaper_text2).setOnClickListener(v -> {
+            Intent intent = new Intent(this, WhitepaperActivity.class);
+            startActivity(intent);
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -7,6 +7,59 @@
     tools:context=".ui.notifications.NotificationsFragment">
 
     <TextView
+        android:id="@+id/terms_text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:clickable="true"
+        android:padding="2sp"
+        android:text="Terms and condition"
+        android:textColor="#373737"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/privacy_text3"
+        app:layout_constraintHorizontal_bias="0.153"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.839" />
+
+    <TextView
+        android:id="@+id/privacy_text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="68dp"
+        android:clickable="true"
+        android:padding="2sp"
+        android:text="Privacy policy"
+        android:textColor="#373737"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.676"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/terms_text3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/whitepaper_text3"
+        android:layout_width="76dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginBottom="28dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:padding="2sp"
+        android:text="Whitepaper"
+        android:textColor="#353535"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/terms_text3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
         android:id="@+id/text_notifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

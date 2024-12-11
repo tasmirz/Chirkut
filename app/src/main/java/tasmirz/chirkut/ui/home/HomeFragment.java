@@ -30,7 +30,6 @@ public class HomeFragment extends Fragment {
     private PrivateKey privateKey;
 
     public HomeFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -41,15 +40,14 @@ public class HomeFragment extends Fragment {
         recyclerView = root.findViewById(R.id.home_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Get current username and private key from SharedPreferences
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
         currentUsername = sharedPreferences.getString("username", "");
         String privateKeyString = sharedPreferences.getString("PrivateKey", "");
 
-        // Convert the private key string to PrivateKey object
+
         privateKey = getPrivateKeyFromString(privateKeyString);
 
-        // Query to get messages where to_usr equals currentUsername
+ 
         messagesRef = FirebaseDatabase.getInstance().getReference().child("messages");
         Query query = messagesRef.orderByChild("to_usr").equalTo(currentUsername);
 

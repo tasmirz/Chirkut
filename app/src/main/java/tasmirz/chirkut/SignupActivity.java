@@ -105,6 +105,20 @@ public class SignupActivity extends AppCompatActivity {
 
             signInWithGoogle();
         });
+        findViewById(R.id.privacy_text2).setOnClickListener(v -> {
+            Intent intent = new Intent(this, PrivacyPolicyActivity.class);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.terms_text2).setOnClickListener(v -> {
+            Intent intent = new Intent(this, TermsOfServiceActivity.class);
+            startActivity(intent);
+        });
+
+        findViewById(R.id.whitepaper_text).setOnClickListener(v -> {
+            Intent intent = new Intent(this, WhitepaperActivity.class);
+            startActivity(intent);
+        });
         toSignIn.setOnClickListener(v-> {
             Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
             startActivity(intent);

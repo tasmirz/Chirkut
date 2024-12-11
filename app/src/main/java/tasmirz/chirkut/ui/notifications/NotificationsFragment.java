@@ -29,7 +29,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import tasmirz.chirkut.LoginActivity;
+import tasmirz.chirkut.PrivacyPolicyActivity;
 import tasmirz.chirkut.R;
+import tasmirz.chirkut.TermsOfServiceActivity;
+import tasmirz.chirkut.WhitepaperActivity;
 import tasmirz.chirkut.databinding.FragmentNotificationsBinding;
 
 public class NotificationsFragment extends Fragment {
@@ -67,6 +70,20 @@ public class NotificationsFragment extends Fragment {
         pfp.setImageBitmap(decodedByte);
 
         pfp.setOnClickListener(v -> openImagePicker());
+        root.findViewById(R.id.privacy_text3).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), PrivacyPolicyActivity.class);
+            startActivity(intent);
+        });
+
+        root.findViewById(R.id.terms_text3).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), TermsOfServiceActivity.class);
+            startActivity(intent);
+        });
+
+        root.findViewById(R.id.whitepaper_text3).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), WhitepaperActivity.class);
+            startActivity(intent);
+        });
 
         return root;
     }
