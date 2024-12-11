@@ -30,7 +30,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.nio.charset.StandardCharsets;
+import java.security.KeyFactory;
 import java.security.MessageDigest;
+import java.security.PrivateKey;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Base64;
 
 import javax.crypto.Cipher;
@@ -40,7 +43,8 @@ public class LoginActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 9001;
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseAuth mAuth;
-
+    String encryptedPrivateKey;
+    String decryptedPrivateKey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,11 +113,13 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+
     private void checkUserInDatabase(FirebaseUser user) {
-    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("userProfiles").child(user.getUid());
+    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
     databaseReference.get().addOnCompleteListener(task -> {
         if (task.isSuccessful() && task.getResult().exists()) {
             // Show a dialog to ask for password
+            encryptedPrivateKey = task.getResult().child("encryptedPrivateKey").getValue(String.class);
             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
             builder.setTitle("Enter Password");
 
@@ -125,39 +131,48 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String password = input.getText().toString();
-                    databaseReference.get().addOnCompleteListener(task -> {
-                        if (task.isSuccessful() && task.getResult().exists()) {
-                            String encryptedPrivateKey = task.getResult().child("encryptedPrivateKey").getValue(String.class);
-                            String decryptedPrivateKey;
+
                     try {
-                        // Hash the user-provided password to SHA-256
-                        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-                        byte[] hashedPassword = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-                        
-                        // Use the hashed password as the key for AES
-                        SecretKeySpec secretKeySpec = new SecretKeySpec(hashedPassword, "AES");
+                        byte[] keyBytes = new byte[16];
+                        byte[] passwordBytes = password.getBytes(StandardCharsets.UTF_8);
+                        System.arraycopy(passwordBytes, 0, keyBytes, 0, Math.min(passwordBytes.length, keyBytes.length));
+                        SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, "AES");
                         Cipher cipher = Cipher.getInstance("AES");
                         cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
-                        
-                        // Decrypt the private key
+
                         byte[] encryptedPrivateKeyBytes = Base64.getDecoder().decode(encryptedPrivateKey);
                         byte[] decryptedPrivateKeyBytes = cipher.doFinal(encryptedPrivateKeyBytes);
-                        decryptedPrivateKey = Base64.getEncoder().encodeToString(decryptedPrivateKeyBytes);
 
+                        // Reconstruct the PrivateKey object
+                        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+                        PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(decryptedPrivateKeyBytes);
+                        PrivateKey privateKey = keyFactory.generatePrivate(privateKeySpec);
+
+                        // Optionally, encode the decrypted private key as a string
+                        String decryptedPrivateKeyString = Base64.getEncoder().encodeToString(decryptedPrivateKeyBytes);
+
+                        // Save to SharedPreferences
                         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("username", task.getResult().child("username").getValue(String.class));
-                                editor.putString("userImage", task.getResult().child("image").getValue(String.class));
-                                editor.putString("PrivateKey", decryptedPrivateKey);
-                                editor.apply();
-                                updateUI(user);
+                        editor.putString("username", task.getResult().child("username").getValue(String.class));
+                        editor.putString("PrivateKey", decryptedPrivateKeyString);
+                        // Load image from userProfiles
+                        DatabaseReference userProfilesRef = FirebaseDatabase.getInstance().getReference("userProfiles").child(user.getUid());
+                        userProfilesRef.get().addOnCompleteListener(profileTask -> {
+                            if (profileTask.isSuccessful() && profileTask.getResult().exists()) {
+                                String userImage = profileTask.getResult().child("image").getValue(String.class);
+                                editor.putString("userImage", userImage);
+                            }
+                            editor.apply();
+                            updateUI(user);
+                        });
+                        return;
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 Toast.makeText(LoginActivity.this, "Failed to decrypt private key.", Toast.LENGTH_SHORT).show();
                                 signOut();
                             }
-                        }
-                    });
+
                     
                 }
             });

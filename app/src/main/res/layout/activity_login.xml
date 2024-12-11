@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#FFFFFB"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -12,34 +12,51 @@
         android:id="@+id/imageView2"
         android:layout_width="348dp"
         android:layout_height="246dp"
+        android:background="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.019"
+        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/placeholder_text"
-        android:layout_width="200dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="36dp"
-        android:text="lorem ipsum dolor sit amet, lorem ipsum"
+        android:layout_width="235dp"
+        android:layout_height="50dp"
+        android:text="চিরকুট"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textColor="#FF9800"
+        android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/login_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.186" />
+
+    <TextView
+        android:id="@+id/placeholder_text2"
+        android:layout_width="211dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="36dp"
+        android:text="E2EE Anonymous messages"
+        android:textAlignment="center"
+        android:textColor="#545454"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/login_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.339" />
 
     <Button
         android:id="@+id/login_button"
         android:layout_width="334dp"
         android:layout_height="54dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="#FFC107"
         android:text="Login"
         android:textColor="@color/black"
         app:cornerRadius="8dp"
@@ -48,7 +65,7 @@
         app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.649" />
+        app:layout_constraintVertical_bias="0.631" />
 
     <TextView
         android:id="@+id/signup_text"
@@ -66,19 +83,19 @@
 
     <TextView
         android:id="@+id/signup_link"
-        android:layout_width="63dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="55dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="8dp"
         android:clickable="true"
         android:padding="2sp"
         android:text="Sign Up"
-        android:textColor="@color/black"
+        android:textColor="#FFC107"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/signup_text"
         app:layout_constraintStart_toEndOf="@+id/signup_text"
         app:layout_constraintTop_toTopOf="@+id/signup_text"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/terms_text"
@@ -87,14 +104,14 @@
         android:clickable="true"
         android:padding="2sp"
         android:text="Terms and condition"
-        android:textColor="@color/black"
+        android:textColor="#373737"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/privacy_text"
-        app:layout_constraintHorizontal_bias="0.685"
+        app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.913" />
+        app:layout_constraintVertical_bias="0.914" />
 
     <TextView
         android:id="@+id/privacy_text"
@@ -103,11 +120,11 @@
         android:clickable="true"
         android:padding="2sp"
         android:text="Privacy policy"
-        android:textColor="@color/black"
+        android:textColor="#373737"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.778"
+        app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/terms_text"
         app:layout_constraintVertical_bias="0.0" />
@@ -121,11 +138,11 @@
         android:clickable="true"
         android:padding="2sp"
         android:text="Whitepaper"
-        android:textColor="@color/black"
+        android:textColor="#353535"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/terms_text"
         app:layout_constraintVertical_bias="0.0" />

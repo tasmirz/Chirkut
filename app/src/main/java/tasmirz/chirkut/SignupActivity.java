@@ -193,11 +193,12 @@ public class SignupActivity extends AppCompatActivity {
                         KeyPair keyPair = keyGen.generateKeyPair();
                         PublicKey publicKey = keyPair.getPublic();
                         PrivateKey privateKey = keyPair.getPrivate();
-                        // Hash the user-provided password to SHA-256
-                        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-                        byte[] hashedPassword = digest.digest(passwordInput.getText().toString().trim().getBytes(StandardCharsets.UTF_8));
-                        // Use the hashed password as the key for AES
-                        SecretKeySpec secretKeySpec = new SecretKeySpec(hashedPassword, "AES");
+                        // Hash the user-provided password to SHA-256\
+                        byte[] keyBytes = new byte[16];
+                        byte[] passwordBytes = passwordInput.getText().toString().trim().getBytes(StandardCharsets.UTF_8);
+                        System.arraycopy(passwordBytes, 0, keyBytes, 0, Math.min(passwordBytes.length, keyBytes.length));
+                        SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, "AES");
+                    
                         Cipher cipher = Cipher.getInstance("AES");
                         cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
                         byte[] encryptedPrivateKey = cipher.doFinal(privateKey.getEncoded());
@@ -226,6 +227,7 @@ public class SignupActivity extends AppCompatActivity {
                         editor.putString("userId", user.getUid());
                         editor.putString("PrivateKey", Base64.getEncoder().encodeToString(privateKey.getEncoded()));
                         editor.putString("userImage", imageString);
+
                         editor.apply();
                         Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                         startActivity(intent);
